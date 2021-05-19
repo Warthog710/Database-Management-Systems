@@ -1,0 +1,66 @@
+CREATE TABLE STUDENTS
+(
+	NAME VARCHAR(20),
+	SSN CHAR(9) NOT NULL,
+	PNUMBER INTEGER NOT NULL,
+	PRIMARY KEY SSN
+);
+
+CREATE TABLE ENROLLS
+(
+	SSN CHAR(9) NOT NULL,
+	SECTIONNO INTEGER NOT NULL,
+	COURSENO INTEGER NOT NULL,
+	FOREIGN KEY(SSN) REFERENCES STUDENTS(SSN),
+	PRIMARY KEY(SECTIONNO, COURSENO)
+);
+
+INSERT INTO STUDENTS VALUES('QUINN', '123456789', 5306832426);
+
+INSERT INTO STUDENTS(SSN) VALUES('123456789');
+
+INSERT INTO DEPT_INFO(DNAME, #EMPS, TOTAL_SAL)
+SELECT DNAME, COUNT(*), SUM(SALARY)
+FROM EMPLOYEE AS E JOIN DEPARTMENT AS D ON E.DNUM = D.DNO
+GROUP BY DNAME;
+
+ALTER TABLE EMPLOYEES ADD JOB VARCHAR(12);
+
+ALTER TABLE EMPLOYEES DROP ADDRESS;
+
+UPDATE TAKES SET RESULT=84.3 WHERE SSN='123456789';
+
+DELETE FROM TAKES WHERE SSN='123456789'
+
+DROP TABLE EMPLOYEES
+
+1NF
+===
+No composite or multi-valued attributes. Is the definition of a relation.
+
+2NF
+===
+Every non-prime (not part of a key) attribute must be fully functionally dependent (can only be derived from the unalterd key) on every key in R.
+
+3NF
+===
+Whenever a non-trivial FD (trivial if y is subset of x) X->A holds in R, then either.
+1. X is a superkey of R (any key)
+2. A is a prime attribute of R (apart of a key)
+
+BCNF
+====
+Every non-trivial X->A, X is a superkey.
+
+NOTES
+=====
+WHERE SALARY >ALL (SUB-QUERY);
+WHERE SALARY >ANY (SUB-QUERY);
+WHERE EXISTS (SUB-QUERY);
+WHERE (SUB-QUERY) >= 2;
+WHERE NOT EXISTS (SUB-QUERY);
+
+Aggregates
+==========
+
+Min(), Max(), Count(), Sum(), Avg()
